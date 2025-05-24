@@ -33,11 +33,13 @@
   "build": {
     "appId": "com.infinitumimagery.musicpresence",
     "productName": "Infinitum Music Activity",
+    "icon": "assets/image1.png",
     "mac": {
       "target": [
         "dmg",
         "zip"
-      ]
+      ],
+      "identity": null
     },
     "win": {
       "target": [
@@ -50,11 +52,16 @@
         "AppImage",
         "deb",
         "rpm"
-      ]
+      ],
+      "maintainer": "support@infinitumimagery.com"
     },
     "files": [
       "dist/**/*",
       "assets/**/*"
     ]
+  },
+  "author": {
+    "name": "Infinitum Imagery LLC",
+    "email": "support@infinitumimagery.com"
   }
 }
