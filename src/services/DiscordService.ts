@@ -1,5 +1,9 @@
+// @ts-ignore
+// eslint-disable-next-line
+declare module 'discord-rpc';
+
 import { Client } from 'discord-rpc';
-import { MusicInfo } from './AppleMusicService';
+import { MusicInfo } from './MusicService';
 
 export interface DiscordConfig {
   clientId: string;
@@ -10,7 +14,7 @@ export interface DiscordConfig {
 
 export class DiscordService {
   private static instance: DiscordService;
-  private client: Client;
+  private client: any;
   private config: DiscordConfig;
   private connected: boolean = false;
 

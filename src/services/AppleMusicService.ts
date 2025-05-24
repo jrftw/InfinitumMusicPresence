@@ -6,8 +6,6 @@ const execAsync = promisify(exec);
 
 export class AppleMusicService extends BaseMusicService {
   private static instance: AppleMusicService;
-  private updateInterval: NodeJS.Timeout | null = null;
-  private listeners: ((info: MusicInfo) => void)[] = [];
 
   private constructor(config: MusicServiceConfig) {
     super(config);
@@ -22,7 +20,7 @@ export class AppleMusicService extends BaseMusicService {
 
   async getCurrentTrack(): Promise<MusicInfo> {
     const script = `
-      tell application "Music"
+      tell application \"Music\"
         if player state is playing then
           set currentTrack to current track
           set trackInfo to {name of currentTrack, artist of currentTrack, album of currentTrack, duration of currentTrack, player position, player state}
@@ -70,17 +68,5 @@ export class AppleMusicService extends BaseMusicService {
       clearInterval(this.updateInterval);
       this.updateInterval = null;
     }
-  }
-
-  addListener(listener: (info: MusicInfo) => void): void {
-    this.listeners.push(listener);
-  }
-
-  removeListener(listener: (info: MusicInfo) => void): void {
-    this.listeners = this.listeners.filter(l => l !== listener);
-  }
-
-  private notifyListeners(info: MusicInfo): void {
-    this.listeners.forEach(listener => listener(info));
   }
 } 
