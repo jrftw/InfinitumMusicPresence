@@ -65,7 +65,7 @@ class MusicPresenceApp {
     this.tray = new Tray(trayIcon);
     const contextMenu = Menu.buildFromTemplate([
       {
-        label: 'Status: Running',
+        label: 'Infinitum Music Activity: Running',
         enabled: false
       },
       { type: 'separator' },
@@ -122,7 +122,7 @@ class MusicPresenceApp {
         click: () => this.quit()
       }
     ]);
-    this.tray.setToolTip('Music Presence');
+    this.tray.setToolTip('Infinitum Music Activity');
     this.tray.setContextMenu(contextMenu);
   }
 

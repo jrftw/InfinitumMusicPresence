@@ -1,6 +1,6 @@
-# Music Presence
+# Infinitum Music Activity
 
-Music Presence is a cross-platform, open-source app that shows your music activity on Discord and beyond—no matter what player or platform you use. It supports 29+ media players, browser playback, and all major streaming services, with advanced features for social listening, scrobbling, and more.
+Infinitum Music Activity is a cross-platform, open-source app that shows your music activity on Discord and beyond—no matter what player or platform you use. It supports 29+ media players, browser playback, and all major streaming services, with advanced features for social listening, scrobbling, and more.
 
 ---
 
@@ -107,7 +107,7 @@ Music Presence is a cross-platform, open-source app that shows your music activi
 ## Disclaimer
 
 This software is **not** affiliated with or endorsed by Discord.
-This software is **not** affiliated with or endorsed by any streaming service, media player, or company that distributes music, including but not limited to those displayed within the Music Presence app.
+This software is **not** affiliated with or endorsed by any streaming service, media player, or company that distributes music, including but not limited to those displayed within the Infinitum Music Activity app.
 
 ---
 

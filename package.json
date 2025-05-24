@@ -1,7 +1,7 @@
 {
   "name": "infinitum-music-activity",
   "version": "1.0.0",
-  "description": "Discord Rich Presence integration for multiple music services",
+  "description": "Infinitum Music Activity: Cross-platform music presence for Discord and more.",
   "main": "dist/index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
@@ -31,7 +31,7 @@
   },
   "build": {
     "appId": "com.infinitumimagery.musicpresence",
-    "productName": "Music Presence",
+    "productName": "Infinitum Music Activity",
     "mac": { "target": ["dmg", "zip"] },
     "win": { "target": ["nsis", "portable"] },
     "linux": { "target": ["AppImage", "deb", "rpm"] },
