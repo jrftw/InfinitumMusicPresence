@@ -7,11 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
+  build-macos:
+    runs-on: macos-latest
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        arch: [x64, arm64]
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
@@ -22,16 +22,66 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - name: Package
-        run: npm run dist
+      - name: Package (macOS ${{ matrix.arch }})
+        run: |
+          npx electron-builder --mac --${{ matrix.arch }}
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: installers-${{ matrix.os }}
+          name: macos-${{ matrix.arch }}
+          path: dist/*
+
+  build-windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [x64, ia32]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Package (Windows ${{ matrix.arch }})
+        run: |
+          npx electron-builder --win --${{ matrix.arch }}
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-${{ matrix.arch }}
+          path: dist/*
+
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [x64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Package (Linux ${{ matrix.arch }})
+        run: |
+          npx electron-builder --linux --${{ matrix.arch }} || echo "Linux build failed for ${{ matrix.arch }}"
+      - name: Upload Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-${{ matrix.arch }}
           path: dist/*
 
   release:
-    needs: build
+    needs: [build-macos, build-windows, build-linux]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

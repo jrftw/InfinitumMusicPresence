@@ -1,5 +1,68 @@
 # Infinitum Music Activity
 
+[![GitHub release](https://img.shields.io/github/v/release/jrftw/InfinitumMusicPresence?label=Latest%20Release)](https://github.com/jrftw/InfinitumMusicPresence/releases/latest)
+[![Releases](https://img.shields.io/github/downloads/jrftw/InfinitumMusicPresence/total?label=All%20Downloads)](https://github.com/jrftw/InfinitumMusicPresence/releases)
+
+---
+
+## 🚀 Download
+
+- **[⬇️ Download Latest Release](https://github.com/jrftw/InfinitumMusicPresence/releases/latest)**
+- **[All Releases & Versions](https://github.com/jrftw/InfinitumMusicPresence/releases)**
+
+| Platform | Installer |
+|----------|-----------|
+| ![macOS](https://img.shields.io/badge/macOS-black?logo=apple) | `.dmg` / `.zip` (Apple Silicon: `arm64`, Intel: `x64`) |
+| ![Windows](https://img.shields.io/badge/Windows-blue?logo=windows) | `.exe` (x64 or x86) |
+| ![Linux](https://img.shields.io/badge/Linux-yellow?logo=linux) | `.AppImage` / `.deb` / `.rpm` (x64 or arm) |
+
+---
+
+## 📥 Detailed Install Guide
+
+### **How to Pick the Right Download**
+- **Go to the [Releases page](https://github.com/jrftw/InfinitumMusicPresence/releases)**
+- Each release lists separate downloads for each platform and architecture:
+  - **macOS:**
+    - `arm64` = Apple Silicon (M1, M2, etc.)
+    - `x64` = Intel Macs
+  - **Windows:**
+    - `x64` = 64-bit Windows (most modern PCs)
+    - `x86` = 32-bit Windows (older PCs)
+  - **Linux:**
+    - `x64` = 64-bit Intel/AMD
+    - `arm64` = ARM (Raspberry Pi, some Chromebooks)
+- Download the file that matches your OS and architecture.
+
+### **macOS**
+1. Download the `.dmg` or `.zip` for your architecture (`arm64` for Apple Silicon, `x64` for Intel).
+2. Open the `.dmg` and drag the app to Applications, or unzip the `.zip` and move the app to Applications.
+3. If you see a security warning, right-click the app and choose “Open” the first time.
+
+### **Windows**
+1. Download the `.exe` for your architecture (`x64` for most, `x86` for older PCs).
+2. Double-click the installer and follow the prompts.
+3. For the portable version, just unzip and run the `.exe`.
+
+### **Linux**
+1. Download the `.AppImage`, `.deb`, or `.rpm` for your architecture (`x64` or `arm64`).
+2. For `.AppImage`:
+   - Make it executable: `chmod +x InfinitumMusicActivity-*.AppImage`
+   - Run: `./InfinitumMusicActivity-*.AppImage`
+3. For `.deb`:
+   - Install: `sudo dpkg -i InfinitumMusicActivity-*.deb`
+4. For `.rpm`:
+   - Install: `sudo rpm -i InfinitumMusicActivity-*.rpm`
+
+---
+
+## 🔄 Multiple Versions & Architectures
+- Every release on the [Releases page](https://github.com/jrftw/InfinitumMusicPresence/releases) has separate downloads for each OS and architecture.
+- You can always download older versions if needed.
+- The file name will indicate the version and architecture (e.g., `Infinitum Music Activity-1.0.0-arm64.dmg`).
+
+---
+
 Infinitum Music Activity is a cross-platform, open-source app that shows your music activity on Discord and beyond—no matter what player or platform you use. It supports 29+ media players, browser playback, and all major streaming services, with advanced features for social listening, scrobbling, and more.
 
 ---
@@ -46,12 +109,6 @@ Infinitum Music Activity is a cross-platform, open-source app that shows your mu
 ---
 
 ## Installation & Download
-
-### **Download**
-- Visit the [Releases page](https://github.com/jrftw/InfinitumMusicPresence/releases) to download the latest installer for your platform:
-  - **macOS:** `.dmg` or `.zip`
-  - **Windows:** `.exe` (NSIS installer or portable)
-  - **Linux:** `.AppImage`, `.deb`, or `.rpm`
 
 ### **Build from Source**
 1. Clone the repository:
