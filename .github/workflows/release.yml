@@ -1,97 +1,131 @@
-name: Build and Release
+name: Release
 
 on:
   push:
     tags:
-      - 'v*.*.*'
-  workflow_dispatch:
+      - 'v*'
 
 jobs:
-  build-macos:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        arch: [x64, arm64]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Package (macOS ${{ matrix.arch }})
-        run: |
-          npx electron-builder --mac --${{ matrix.arch }}
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: macos-${{ matrix.arch }}
-          path: dist/*
-
-  build-windows:
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        arch: [x64, ia32]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Package (Windows ${{ matrix.arch }})
-        run: |
-          npx electron-builder --win --${{ matrix.arch }}
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows-${{ matrix.arch }}
-          path: dist/*
-
-  build-linux:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        arch: [x64, arm64]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Package (Linux ${{ matrix.arch }})
-        run: |
-          npx electron-builder --linux --${{ matrix.arch }} || echo "Linux build failed for ${{ matrix.arch }}"
-      - name: Upload Artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-${{ matrix.arch }}
-          path: dist/*
-
   release:
-    needs: [build-macos, build-windows, build-linux]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        include:
+          - os: macos-latest
+            artifact: InfinitumMusicActivity-darwin-x64.dmg
+            artifact-arm: InfinitumMusicActivity-darwin-arm64.dmg
+          - os: windows-latest
+            artifact: InfinitumMusicActivity-Setup-x64.exe
+            artifact-arm: InfinitumMusicActivity-Setup-x86.exe
+          - os: ubuntu-latest
+            artifact: InfinitumMusicActivity-linux-x64.AppImage
+            artifact-arm: InfinitumMusicActivity-linux-arm64.AppImage
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build
+        run: npm run build
+        
+      - name: Package
+        run: npm run dist
+        
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist/${{ matrix.artifact }}
+          
+      - name: Upload ARM artifacts
+        if: matrix.os == 'macos-latest' || matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.artifact-arm }}
+          path: dist/${{ matrix.artifact-arm }}
+          
+  create-release:
+    needs: release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: dist
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        
       - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: dist/**/*
+        id: create_release
+        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          
+      - name: Upload Release Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./InfinitumMusicActivity-darwin-x64.dmg
+          asset_name: InfinitumMusicActivity-darwin-x64.dmg
+          asset_content_type: application/octet-stream
+          
+      - name: Upload Release Assets (ARM)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./InfinitumMusicActivity-darwin-arm64.dmg
+          asset_name: InfinitumMusicActivity-darwin-arm64.dmg
+          asset_content_type: application/octet-stream
+          
+      - name: Upload Windows Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./InfinitumMusicActivity-Setup-x64.exe
+          asset_name: InfinitumMusicActivity-Setup-x64.exe
+          asset_content_type: application/octet-stream
+          
+      - name: Upload Windows Assets (x86)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./InfinitumMusicActivity-Setup-x86.exe
+          asset_name: InfinitumMusicActivity-Setup-x86.exe
+          asset_content_type: application/octet-stream
+          
+      - name: Upload Linux Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./InfinitumMusicActivity-linux-x64.AppImage
+          asset_name: InfinitumMusicActivity-linux-x64.AppImage
+          asset_content_type: application/octet-stream
+          
+      - name: Upload Linux Assets (ARM)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./InfinitumMusicActivity-linux-arm64.AppImage
+          asset_name: InfinitumMusicActivity-linux-arm64.AppImage
+          asset_content_type: application/octet-stream 

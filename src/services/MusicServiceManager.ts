@@ -88,4 +88,8 @@ export class MusicServiceManager {
       service.setConfig(config);
     }
   }
+
+  isAnyServiceEnabled(): boolean {
+    return Array.from(this.services.values()).some(service => service.isEnabled());
+  }
 } 

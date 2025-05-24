@@ -1,179 +1,156 @@
 # Infinitum Music Activity
 
-[![GitHub release](https://img.shields.io/github/v/release/jrftw/InfinitumMusicPresence?label=Latest%20Release)](https://github.com/jrftw/InfinitumMusicPresence/releases/latest)
-[![Releases](https://img.shields.io/github/downloads/jrftw/InfinitumMusicPresence/total?label=All%20Downloads)](https://github.com/jrftw/InfinitumMusicPresence/releases)
+A cross-platform desktop application that shows your music activity (from Apple Music, Spotify, Amazon Music, etc.) on Discord and beyond. Features include Listen Along, multi-platform song links, scrobbling, and browser extension support.
 
----
-
-## 🚀 Download
-
-- **[⬇️ Download Latest Release](https://github.com/jrftw/InfinitumMusicPresence/releases/latest)**
-- **[All Releases & Versions](https://github.com/jrftw/InfinitumMusicPresence/releases)**
-
-| Platform | Installer |
-|----------|-----------|
-| ![macOS](https://img.shields.io/badge/macOS-black?logo=apple) | `.dmg` / `.zip` (Apple Silicon: `arm64`, Intel: `x64`) |
-| ![Windows](https://img.shields.io/badge/Windows-blue?logo=windows) | `.exe` (x64 or x86) |
-| ![Linux](https://img.shields.io/badge/Linux-yellow?logo=linux) | `.AppImage` / `.deb` / `.rpm` (x64 or arm) |
-
----
-
-## 📥 Detailed Install Guide
-
-### **How to Pick the Right Download**
-- **Go to the [Releases page](https://github.com/jrftw/InfinitumMusicPresence/releases)**
-- Each release lists separate downloads for each platform and architecture:
-  - **macOS:**
-    - `arm64` = Apple Silicon (M1, M2, etc.)
-    - `x64` = Intel Macs
-  - **Windows:**
-    - `x64` = 64-bit Windows (most modern PCs)
-    - `x86` = 32-bit Windows (older PCs)
-  - **Linux:**
-    - `x64` = 64-bit Intel/AMD
-    - `arm64` = ARM (Raspberry Pi, some Chromebooks)
-- Download the file that matches your OS and architecture.
-
-### **macOS**
-1. Download the `.dmg` or `.zip` for your architecture (`arm64` for Apple Silicon, `x64` for Intel).
-2. Open the `.dmg` and drag the app to Applications, or unzip the `.zip` and move the app to Applications.
-3. If you see a security warning, right-click the app and choose “Open” the first time.
-
-### **Windows**
-1. Download the `.exe` for your architecture (`x64` for most, `x86` for older PCs).
-2. Double-click the installer and follow the prompts.
-3. For the portable version, just unzip and run the `.exe`.
-
-### **Linux**
-1. Download the `.AppImage`, `.deb`, or `.rpm` for your architecture (`x64` or `arm64`).
-2. For `.AppImage`:
-   - Make it executable: `chmod +x InfinitumMusicActivity-*.AppImage`
-   - Run: `./InfinitumMusicActivity-*.AppImage`
-3. For `.deb`:
-   - Install: `sudo dpkg -i InfinitumMusicActivity-*.deb`
-4. For `.rpm`:
-   - Install: `sudo rpm -i InfinitumMusicActivity-*.rpm`
-
----
-
-## 🔄 Multiple Versions & Architectures
-- Every release on the [Releases page](https://github.com/jrftw/InfinitumMusicPresence/releases) has separate downloads for each OS and architecture.
-- You can always download older versions if needed.
-- The file name will indicate the version and architecture (e.g., `Infinitum Music Activity-1.0.0-arm64.dmg`).
-
----
-
-Infinitum Music Activity is a cross-platform, open-source app that shows your music activity on Discord and beyond—no matter what player or platform you use. It supports 29+ media players, browser playback, and all major streaming services, with advanced features for social listening, scrobbling, and more.
-
----
+![Infinitum Music Activity](assets/image1.png)
 
 ## Features
 
-- **Works with any media player!**
-  - 29+ players supported (native, browser, streaming, etc.)—adding new ones is easy.
-- **100% correct album cover**
-  - Always shows the right artwork, no external sources needed.
-- **Fine-grained control**
-  - Choose which apps are shared, customize status per player, override settings individually.
-- **Spotify synergy & podcast support**
-  - Works with official Spotify integration, shows podcasts, lets you choose what's shared.
-- **Dynamic tray icon**
-  - Tray icon changes to reflect current state (active, paused, waiting, disabled).
-- **Accurate playback position**
-  - Shows real-time elapsed/remaining time if supported by the player.
-- **Customizable activity name**
-  - Switch between "Music" or the player name in your status with one click.
-- **Paused/offline media handling**
-  - Show paused status or custom icon for offline players.
-- **Unified controls**
-  - One app for all your music presence needs—no more separate plugins.
-- **In-app & automatic updates**
-  - Seamless updates, with changelog popups after each update.
-- **TIDAL/Deezer enhancements**
-  - "Listen to this song" button, shows all artists (not just the main one).
-- **Listen Along**
-  - Sync playback with friends or groups, join sessions, or let others follow your music in real time.
-- **Multi-platform song links**
-  - Share a button in your status with links to the song on all major platforms (Spotify, TIDAL, Apple Music, YouTube, etc.).
-- **Integrations for real-time streaming**
-  - Public API/WebSocket for third-party platforms to receive your playback data.
-- **Modern windowed UI**
-  - Full-featured dashboard for settings, friends, integrations, and more.
-- **Scrobbling support**
-  - Native integration with last.fm, ListenBrainz, and libre.fm.
-- **Browser media support**
-  - Custom browser extension for Chrome/Firefox/Edge to detect and share browser playback.
-- **Linux support**
-  - Native MPRIS integration, AppImage/deb/rpm builds.
+- 🎵 **Multi-Platform Music Support**
+  - Apple Music
+  - Spotify
+  - Amazon Music
+  - YouTube Music
+  - More coming soon!
 
----
+- 🎮 **Discord Integration**
+  - Rich Presence
+  - Listen Along
+  - Real-time status updates
+  - Album art display
 
-## Installation & Download
+- 🎨 **Modern UI**
+  - Clean, Apple-inspired design
+  - Dark/Light mode support
+  - Real-time music info
+  - Interactive settings
 
-### **Build from Source**
+- 🔧 **Advanced Features**
+  - Auto-detection of music players
+  - Cross-platform song links
+  - Scrobbling support
+  - Browser extension integration
+
+## Installation
+
+### Windows
+1. Download the latest release from the [Releases page](https://github.com/yourusername/InfinitumMusicActivity/releases)
+2. Choose the appropriate version:
+   - `InfinitumMusicActivity-Setup-x64.exe` for 64-bit Windows
+   - `InfinitumMusicActivity-Setup-x86.exe` for 32-bit Windows
+3. Run the installer and follow the prompts
+
+### macOS
+1. Download the latest release from the [Releases page](https://github.com/yourusername/InfinitumMusicActivity/releases)
+2. Choose the appropriate version:
+   - `InfinitumMusicActivity-darwin-x64.dmg` for Intel Macs
+   - `InfinitumMusicActivity-darwin-arm64.dmg` for Apple Silicon Macs
+3. Mount the DMG and drag the app to your Applications folder
+
+### Linux
+1. Download the latest release from the [Releases page](https://github.com/yourusername/InfinitumMusicActivity/releases)
+2. Choose the appropriate version:
+   - `InfinitumMusicActivity-linux-x64.AppImage` for 64-bit Linux
+   - `InfinitumMusicActivity-linux-arm64.AppImage` for ARM Linux
+3. Make the AppImage executable: `chmod +x InfinitumMusicActivity-linux-x64.AppImage`
+4. Run the AppImage
+
+## Development
+
+### Prerequisites
+- Node.js 16 or later
+- npm 7 or later
+- Git
+
+### Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/jrftw/InfinitumMusicPresence.git
-   cd InfinitumMusicPresence
+   git clone https://github.com/yourusername/InfinitumMusicActivity.git
+   cd InfinitumMusicActivity
    ```
+
 2. Install dependencies:
    ```bash
    npm install
    ```
-3. Build and package:
+
+3. Build the project:
    ```bash
    npm run build
-   npm run dist
    ```
-4. Find installers in the `dist/` directory.
 
----
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
-## Usage
-- Launch the app. The tray icon will appear and reflect the current state.
-- Open the main window for a full dashboard and settings.
-- Play music in any supported player or browser—your Discord status will update automatically.
-- Use the Listen Along feature to sync playback with friends.
-- Share multi-platform song links directly from your status.
-- Enable scrobbling and integrations in the settings.
+### Building for Production
+```bash
+# Build for all platforms
+npm run build:all
 
----
+# Build for specific platform
+npm run build:win
+npm run build:mac
+npm run build:linux
+```
 
-## Roadmap & Completed Milestones
-- [x] Windowed UI/dashboard (Electron + React)
-- [x] Listen Along backend & sync (WebSocket, group sessions)
-- [x] Multi-platform song links (Odesli/Songlink integration)
-- [x] Linux support (MPRIS, AppImage/deb/rpm)
-- [x] 29+ player support (modular, easy to add new players)
-- [x] Album art extraction for all players
-- [x] Per-player settings and overrides
-- [x] Spotify synergy & podcast support
-- [x] Dynamic tray icon
-- [x] Accurate playback position
-- [x] Activity name customization
-- [x] Paused/offline handling
-- [x] Unified controls
-- [x] In-app/auto updates
-- [x] TIDAL/Deezer enhancements
-- [x] Scrobbling (last.fm, ListenBrainz, libre.fm)
-- [x] Browser extension (Chrome/Firefox/Edge)
-- [x] Public API for integrations
+## Configuration
 
----
+### Discord Integration
+1. Create a new application at [Discord Developer Portal](https://discord.com/developers/applications)
+2. Copy your Client ID
+3. Update the `clientId` in `src/index.ts`
 
-## Disclaimer
+### Music Services
+The app automatically detects running music players. You can also manually enable/disable services:
+1. Click the tray icon
+2. Select your preferred music service
+3. Toggle "Active" to enable/disable
 
-This software is **not** affiliated with or endorsed by Discord.
-This software is **not** affiliated with or endorsed by any streaming service, media player, or company that distributes music, including but not limited to those displayed within the Infinitum Music Activity app.
+## Troubleshooting
 
----
+### Common Issues
+1. **App not detecting music player**
+   - Ensure your music player is running
+   - Check if the service is enabled in the tray menu
+   - Restart the app
+
+2. **Discord Rich Presence not showing**
+   - Verify Discord is running
+   - Check your internet connection
+   - Ensure the app is active in the tray
+
+3. **Album art not displaying**
+   - Check if "Show Album Art" is enabled in settings
+   - Verify your music player is providing artwork
+   - Try refreshing the app
 
 ## Contributing
 
-Pull requests and feature suggestions are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
-MIT License 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Electron](https://www.electronjs.org/)
+- [Discord Rich Presence](https://discord.com/developers/docs/rich-presence/how-to)
+- [Apple Music API](https://developer.apple.com/documentation/applemusicapi)
+- [Spotify Web API](https://developer.spotify.com/documentation/web-api)
+
+## Support
+
+- [GitHub Issues](https://github.com/yourusername/InfinitumMusicActivity/issues)
+- [Discord Server](https://discord.gg/your-server)
+- Email: support@infinitumimagery.com
+
+---
+
+© 2025 Infinitum Imagery LLC. All rights reserved. 

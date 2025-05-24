@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinitum Music Activity</title>
+  <link rel="icon" href="image1.png">
+  <style>
+    body {
+      font-family: 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      margin-top: 32px;
+      margin-bottom: 24px;
+    }
+    header img {
+      width: 56px;
+      height: 56px;
+      margin-right: 18px;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px #0003;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    .status {
+      margin: 24px 0 12px 0;
+      font-size: 1.1rem;
+      color: #7ee787;
+      font-weight: 500;
+    }
+    .now-playing {
+      background: rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 28px 36px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 16px #0002;
+      min-width: 340px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+    .now-playing img {
+      width: 96px;
+      height: 96px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px #0003;
+      background: #222;
+    }
+    .track-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 8px 0 2px 0;
+    }
+    .track-artist, .track-album, .track-source {
+      color: #b0b0b0;
+      font-size: 1rem;
+      margin: 2px 0;
+    }
+    .controls {
+      margin-top: 18px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+    .controls button, .controls input[type=checkbox] {
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .controls button:hover {
+      background: #444;
+    }
+    .section {
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 18px 28px;
+      margin-bottom: 18px;
+      min-width: 320px;
+      box-shadow: 0 1px 6px #0002;
+      backdrop-filter: blur(6px);
+    }
+    .section h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0 0 10px 0;
+      color: #fff;
+      letter-spacing: 0.01em;
+    }
+    .section label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      color: #e0e0e0;
+      cursor: pointer;
+    }
+    .section input[type=checkbox], .section input[type=radio] {
+      margin-right: 10px;
+      accent-color: #7ee787;
+    }
+    .footer {
+      margin-top: auto;
+      margin-bottom: 18px;
+      color: #888;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="image1.png" alt="Infinitum Music Activity Logo">
+    <h1>Infinitum Music Activity</h1>
+  </header>
+  <div class="status" id="status">Connecting...</div>
+  <div class="now-playing">
+    <img src="image1.png" alt="Album Art" id="album-art">
+    <div class="track-title" id="track-title">Not Playing</div>
+    <div class="track-artist" id="track-artist">&nbsp;</div>
+    <div class="track-album" id="track-album">&nbsp;</div>
+    <div class="track-source" id="track-source">&nbsp;</div>
+    <div class="controls">
+      <button id="refresh">Refresh</button>
+      <button id="active-toggle">Active</button>
+    </div>
+  </div>
+  <div class="section">
+    <h2>Appearance</h2>
+    <label><input type="radio" name="appearance" value="auto"> Auto</label>
+    <label><input type="radio" name="appearance" value="light"> Light</label>
+    <label><input type="radio" name="appearance" value="dark"> Dark</label>
+  </div>
+  <div class="section">
+    <h2>Player</h2>
+    <label><input type="radio" name="player" value="auto"> Auto</label>
+    <label><input type="radio" name="player" value="apple"> Apple Music</label>
+    <label><input type="radio" name="player" value="spotify"> Spotify</label>
+    <label><input type="radio" name="player" value="amazon"> Amazon Music</label>
+  </div>
+  <div class="section">
+    <h2>Settings</h2>
+    <label><input type="checkbox" id="show-album-art"> Show Album Art</label>
+    <label><input type="checkbox" id="show-time"> Show Time</label>
+  </div>
+  <div class="footer">&copy; 2025 Infinitum Imagery LLC</div>
+  <script>
+    const { ipcRenderer } = require('electron');
+    async function updateSongInfo() {
+      const info = await ipcRenderer.invoke('get-song-info');
+      if (!info || !info.title) {
+        document.getElementById('track-title').textContent = 'Not Playing';
+        document.getElementById('track-artist').textContent = '';
+        document.getElementById('track-album').textContent = '';
+        document.getElementById('track-source').textContent = '';
+        document.getElementById('album-art').src = 'image1.png';
+        document.getElementById('status').textContent = 'Idle';
+        return;
+      }
+      document.getElementById('track-title').textContent = info.title;
+      document.getElementById('track-artist').textContent = info.artist;
+      document.getElementById('track-album').textContent = info.album;
+      document.getElementById('track-source').textContent = info.source;
+      document.getElementById('status').textContent = info.isPlaying ? 'Active' : 'Paused';
+      // Album art: if available, set src; else fallback
+      if (info.artwork) {
+        document.getElementById('album-art').src = info.artwork;
+      } else {
+        document.getElementById('album-art').src = 'image1.png';
+      }
+    }
+    async function updateSettingsUI() {
+      const settings = await ipcRenderer.invoke('get-settings');
+      document.getElementById('active-toggle').textContent = settings.active ? 'Disable' : 'Active';
+      document.querySelectorAll('input[name=appearance]').forEach(r => r.checked = (r.value === settings.appearance));
+      document.querySelectorAll('input[name=player]').forEach(r => r.checked = (r.value === settings.player));
+      document.getElementById('show-album-art').checked = settings.showAlbumArt;
+      document.getElementById('show-time').checked = settings.showTime;
+    }
+    // Event listeners for settings
+    document.getElementById('active-toggle').onclick = async () => {
+      const settings = await ipcRenderer.invoke('get-settings');
+      ipcRenderer.send('toggle-active', !settings.active);
+      updateSettingsUI();
+    };
+    document.getElementById('refresh').onclick = () => {
+      updateSongInfo();
+    };
+    document.querySelectorAll('input[name=appearance]').forEach(radio => {
+      radio.onchange = () => ipcRenderer.send('set-setting', 'appearance', radio.value);
+    });
+    document.querySelectorAll('input[name=player]').forEach(radio => {
+      radio.onchange = () => ipcRenderer.send('set-setting', 'player', radio.value);
+    });
+    document.getElementById('show-album-art').onchange = (e) => ipcRenderer.send('set-setting', 'showAlbumArt', e.target.checked);
+    document.getElementById('show-time').onchange = (e) => ipcRenderer.send('set-setting', 'showTime', e.target.checked);
+    // Listen for updates from main process
+    ipcRenderer.on('song-info', () => updateSongInfo());
+    ipcRenderer.on('settings', () => updateSettingsUI());
+    // Initial load
+    updateSongInfo();
+    updateSettingsUI();
+    setInterval(updateSongInfo, 2000);
+  </script>
+</body>
+</html> 

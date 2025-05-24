@@ -57,4 +57,8 @@ export abstract class BaseMusicService {
       this.startPolling();
     }
   }
+
+  isEnabled(): boolean {
+    return this.config.enabled;
+  }
 } 
